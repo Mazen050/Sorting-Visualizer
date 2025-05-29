@@ -5,7 +5,7 @@ var arr = [2, 6, 5, 1, 7, 4, 3, 0]
 // const dict ={"steps": [{'type': 'split', 'index': [0, 1, 2, 3, 4, 5, 6, 7], 'depth': 0}, {'type': 'split', 'index': [0, 1, 2, 3], 'depth': 1}, {'type': 'split', 'index': [0, 1], 'depth': 2}, {'type': 'split', 'index': [0], 'depth': 3}, {'type': 'split', 'index': [1], 'depth': 3}, {'type': 'swap', 'index': 0, 'depth': 2}, {'type': 'swap', 'index': 1, 'depth': 2}, {'type': 'merge', 'index': [0, 1], 'depth': 2}, {'type': 'split', 'index': [2, 3], 'depth': 2}, {'type': 'split', 'index': [2], 'depth': 3}, {'type': 'split', 'index': [3], 'depth': 3}, {'type': 'swap', 'index': 3, 'depth': 2}, {'type': 'swap', 'index': 2, 'depth': 2}, {'type': 'merge', 'index': [2, 3], 'depth': 2}, {'type': 'swap', 'index': 2, 'depth': 1}, {'type': 'swap', 'index': 0, 'depth': 1}, {'type': 'swap', 'index': 3, 'depth': 1}, {'type': 'swap', 'index': 1, 'depth': 1}, {'type': 'merge', 'index': [0, 1, 2, 3], 'depth': 1}, {'type': 'split', 'index': [4, 5, 6, 7], 'depth': 1}, {'type': 'split', 'index': [4, 5], 'depth': 2}, {'type': 'split', 'index': [4], 'depth': 3}, {'type': 'split', 'index': [5], 'depth': 3}, {'type': 'swap', 'index': 5, 'depth': 2}, {'type': 'swap', 'index': 4, 'depth': 2}, {'type': 'merge', 'index': [4, 5], 'depth': 2}, {'type': 'split', 'index': [6, 7], 'depth': 2}, {'type': 'split', 'index': [6], 'depth': 3}, {'type': 'split', 'index': [7], 'depth': 3}, {'type': 'swap', 'index': 7, 'depth': 2}, {'type': 'swap', 'index': 6, 'depth': 2}, {'type': 'merge', 'index': [6, 7], 'depth': 2}, {'type': 'swap', 'index': 6, 'depth': 1}, {'type': 'swap', 'index': 7, 'depth': 1}, {'type': 'swap', 'index': 4, 'depth': 1}, {'type': 'swap', 'index': 5, 'depth': 1}, {'type': 'merge', 'index': [4, 5, 6, 7], 'depth': 1}, {'type': 'swap', 'index': 4, 'depth': 0}, {'type': 'swap', 'index': 0, 'depth': 0}, {'type': 'swap', 'index': 1, 'depth': 0}, {'type': 'swap', 'index': 5, 'depth': 0}, {'type': 'swap', 'index': 6, 'depth': 0}, {'type': 'swap', 'index': 2, 'depth': 0}, {'type': 'swap', 'index': 3, 'depth': 0}, {'type': 'swap', 'index': 7, 'depth': 0}, {'type': 'merge', 'index': [0, 1, 2, 3, 4, 5, 6, 7], 'depth': 0}]};
 
 const barheight = 30, durationscale = 10
-var dur = 500
+var dur = 5
 var currentSort = "bubble"
 
 
@@ -73,10 +73,11 @@ slider.addEventListener("input", (e) => {
     const speed = document.querySelector(".speed")
     speed.innerHTML = "Speed: " + e.target.value
     dur = e.target.value * durationscale
+    console.log(dur)
 })
 
 sortbutton.addEventListener('click', () => {
-    fetch(`/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
+    fetch(`http://127.0.0.1:5000/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
     // mergeSort(dict)
     // const el = document.getElementById("0")
     // el.id = 5
@@ -144,8 +145,11 @@ async function animateSwap(bar1, bar2, merge) {
     else {
         // const an = animate(bar1,{x:(rect2.left-rect1.left),duration:500})
         // const an1 = animate(bar2,{x:(rect1.left-rect2.left),duration:500})
-        const an = animate(bar1, { x: (rect2.left - rect1.left), ease: createSpring({ stiffness: 700 }), duration: dur })
+        const an = animate(bar1, { x: (rect2.left - rect1.left), ease: createSpring({ stiffness: 700  }), duration: dur })
         const an1 = animate(bar2, { x: (rect1.left - rect2.left), ease: createSpring({ stiffness: 700 }), duration: dur })
+
+        // const an = animate(bar1, { x: (rect2.left - rect1.left), ease: "inOutElastic", duration: dur })
+        // const an1 = animate(bar2, { x: (rect1.left - rect2.left), ease: "inOutElastic", duration: dur })
         await Promise.all([an, an1])
     }
 
@@ -192,7 +196,7 @@ async function animateDepth(array, depth = 0) {
     if (depth >= 0) {
         var depthAnims = []
         bars.forEach((e) => {
-            const a = animate(e, { y: ((100 * depth) - olddepth) + olddepth, duration: dur*2 })
+            const a = animate(e, { y: ((100 * depth) - olddepth) + olddepth, duration: dur })
             depthAnims.push(a)
         })
         await Promise.all(depthAnims)
@@ -231,7 +235,7 @@ async function mergeSort(dict) {
         if (e["type"] == "swap") {
             console.log('swap')
 
-            await animateSwap(getElem(depthstart[e.depth]).id, e.index, true)
+             animateSwap(getElem(depthstart[e.depth]).id, e.index, true)
             animateDepth([e.index], e.depth);
             depthstart[e.depth]++;
             await delay(dur)
@@ -276,7 +280,7 @@ async function insersionSort(dict) {
         if (e["type"] == "swap") {
             console.log('swap')
             await animateSwap(e.indices[0], e.indices[1])
-            await delay(500)
+            await delay(dur)
         }
         else if (e["type"] == "compare") {
             console.log("split")
@@ -298,7 +302,7 @@ async function quickSort(dict) {
         if (e["type"] == "swap") {
             console.log('swap')
             await animateSwap(e.index[0], e.index[1])
-            await delay(500)
+            await delay(dur)
             animateDepth(e.index, e.depth)
         }
         else if (e["type"] == "compare") {
@@ -326,8 +330,8 @@ async function bubbleSort(dict) {
         if (e["type"] == "swap") {
             console.log('swap')
             await animateSwap(e.index[0], e.index[1])
-            await delay(500)
-            animateDepth(e.index, e.depth)
+            await delay(dur)
+            // animateDepth(e.index, e.depth)
         }
         else if (e["type"] == "compare") {
             console.log("split")
@@ -339,10 +343,7 @@ async function bubbleSort(dict) {
             await delay(dur)
             animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
             animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
-            animateDepth(e.index, e.depth)
-        }
-        else if (e["type"] == "split") {
-            animateDepth(e.index, e.depth)
+            // animateDepth(e.index, e.depth)
         }
     }
 }

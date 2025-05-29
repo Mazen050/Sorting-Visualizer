@@ -21,30 +21,39 @@ const insbutton = document.querySelector("#ins")
 sortbutton.addEventListener('click', () => {
     // fetch("http://127.0.0.1:5000/merge",{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mergeSort(text))
     
-    const frame = document.querySelector("#selection-container")
-    const frameg = document.querySelector("#merge-container")
+    const checkboxs = document.querySelectorAll(".algo-checkbox")
+
+    checkboxs.forEach((e)=>{
+        if(e.checked){
+            const frame = document.querySelector(`#${e.value}-container`)
+            console.log(frame)
+            fetch(`http://127.0.0.1:5000/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
+        }
+    })
+
+    // const frameg = document.querySelector("#merge-container")
     
-    selectionSort(dict,frame);
-    mergeSort(dict_2,frameg);
-    console.log(frame?.querySelector('[id="0"]'))
-    console.log(frameg?.querySelector('[id="0"]'))
+    // selectionSort(dict,frame);
+    // mergeSort(dict_2,frameg);
+    // console.log(frame?.querySelector('[id="0"]'))
+    // console.log(frameg?.querySelector('[id="0"]'))
 
 })
 
-sortbutton.addEventListener('click', () => {
-    const frame = document.querySelector("#selection-container")
-    const frameg = document.querySelector("#merge-container")
-    const selectedAlgos = Array.from(document.querySelectorAll('.algo-checkbox'))
-        .filter(cb => cb.checked)
-        .map(cb => cb.value);
+// sortbutton.addEventListener('click', () => {
+//     const frame = document.querySelector("#selection-container")
+//     const frameg = document.querySelector("#merge-container")
+//     const selectedAlgos = Array.from(document.querySelectorAll('.algo-checkbox'))
+//         .filter(cb => cb.checked)
+//         .map(cb => cb.value);
 
-    if (selectedAlgos.includes("selection")) {
-        selectionSort(dict,frame);
-    }
-    if (selectedAlgos.includes("merge")) {
-        mergeSort(dict_2,frameg);
-    }
-});
+//     if (selectedAlgos.includes("selection")) {
+//         selectionSort(dict,frame);
+//     }
+//     if (selectedAlgos.includes("merge")) {
+//         mergeSort(dict_2,frameg);
+//     }
+// });
 
 
 genbutton.addEventListener('click', () => {
@@ -53,8 +62,18 @@ genbutton.addEventListener('click', () => {
     arr = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]
     
     // checkboxes
-    viewArray(arr_2,"#selection-container")
-    viewArray(arr_2,"#merge-container")
+    const checkboxs = document.querySelectorAll(".algo-checkbox")
+
+    checkboxs.forEach((e)=>{
+        if(e.checked){
+            const frame = document.querySelector(`#${e.value}-container`)
+            console.log(frame)
+            viewArray(arr,`#${e.value}-container`)
+        }
+    })
+
+    // viewArray(arr_2,"#selection-container")
+    // viewArray(arr_2,"#merge-container")
 })
 
 
@@ -185,6 +204,81 @@ function getElem(num,document) {
 //* delay
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+async function bubbleSort(dict,document) {
+    for (const e of dict.steps) {
+        console.log(e)
+        if (e["type"] == "swap") {
+            console.log('swap')
+            await animateSwap(e.index[0], e.index[1],false,document)
+            await delay(dur)
+            // animateDepth(e.index, e.depth)
+        }
+        else if (e["type"] == "compare") {
+            console.log("split")
+            console.log(e["index"][0])
+            const bar1 = document.querySelector(`[id="${e["index"][0]}"]`)
+            const bar2 = document.querySelector(`[id="${e["index"][1]}"]`)
+            animate(bar1, { backgroundColor: "#dc3545", duration: dur })
+            animate(bar2, { backgroundColor: "#dc3545", duration: dur })
+            await delay(dur)
+            animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
+            animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
+            // animateDepth(e.index, e.depth)
+        }
+    }
+}
+
+
+async function insersionSort(dict,document) {
+    for (const e of dict.steps) {
+        console.log(e)
+        if (e["type"] == "swap") {
+            console.log('swap')
+            await animateSwap(e.indices[0], e.indices[1],false,document)
+            await delay(dur)
+        }
+        else if (e["type"] == "compare") {
+            console.log("split")
+            console.log(e["indices"][0])
+            const bar1 = document.querySelector(`[id="${e["indices"][0]}"]`)
+            const bar2 = document.querySelector(`[id="${e["indices"][1]}"]`)
+            animate(bar1, { backgroundColor: "#dc3545", duration: dur })
+            animate(bar2, { backgroundColor: "#dc3545", duration: dur })
+            await delay(dur)
+            animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
+            animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
+        }
+    }
+}
+
+async function quickSort(dict,document) {
+    for (const e of dict.steps) {
+        console.log(e)
+        if (e["type"] == "swap") {
+            console.log('swap')
+            await animateSwap(e.index[0], e.index[1],false,document)
+            await delay(dur)
+            animateDepth(e.index, e.depth)
+        }
+        else if (e["type"] == "compare") {
+            console.log("split")
+            console.log(e.index)
+            const bar1 = document.querySelector(`[id="${e["index"][0]}"]`)
+            const bar2 = document.querySelector(`[id="${e["index"][1]}"]`)
+            animate(bar1, { backgroundColor: "#dc3545", duration: dur })
+            animate(bar2, { backgroundColor: "#dc3545", duration: dur })
+            await delay(dur)
+            animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
+            animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
+            animateDepth(e.index, e.depth,document)
+        }
+        else if (e["type"] == "split") {
+            animateDepth(e.index, e.depth,document)
+        }
+    }
 }
 
 //* reads the dictionary sent to it and animates the sorting algo
@@ -354,3 +448,21 @@ document.getElementById("InsertArray").addEventListener("click", () => {
     // document.getElementById("popup").style.display = "none";
 });
 
+
+function mainSort(sortName, steps,container) {
+    if (sortName === "bubble") {
+        bubbleSort(steps,container)
+    }
+    else if (sortName === "selection") {
+        selectionSort(steps,container)
+    }
+    else if (sortName === "insertion") {
+        insersionSort(steps,container)
+    }
+    else if (sortName === "quick") {
+        quickSort(steps,container)
+    }
+    else if (sortName === "merge") {
+        mergeSort(steps,container)
+    }
+}
