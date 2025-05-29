@@ -32,7 +32,7 @@ def bubble_sort(arr,steps):
 
 
 
-@app.route("/insertion",methods = ["POST"])
+@app.route("/api/insertion",methods = ["POST"])
 def func1():
     array = request.get_json()["array"] # array parameter coming from website
     logs = {}                           # record steps here
@@ -68,7 +68,7 @@ def insertion_sort_steps(arr):
 
 
 
-@app.route("/selection",methods = ["POST"])
+@app.route("/api/selection",methods = ["POST"])
 def func2():
     array = request.get_json()["array"] 
     """Logic Here"""
@@ -108,7 +108,7 @@ def selction_sort(array, size):
 
 
 
-@app.route("/quick",methods = ["POST"])
+@app.route("/api/quick",methods = ["POST"])
 def shehab():
     array = request.get_json()["array"] # array parameter coming from website
     logs = {}                           # record steps here
@@ -168,7 +168,7 @@ arr = [2, 6, 5, 1, 7, 4, 3, 0]
 
 
 
-@app.route("/merge",methods = ["POST"])
+@app.route("/api/merge",methods = ["POST"])
 def mazen():
     array = request.get_json()["array"] # array parameter coming from website
     logs = {}                           # record steps here
