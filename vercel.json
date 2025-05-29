@@ -19,8 +19,8 @@
       "dest": "api/test.py"
     },
     {
-      "src": "tes.html",
-      "dest": "/"
+      "src": "/?(.*)",
+      "dest": "tes.html"
     },
     {
       "src": "bonus.html",
