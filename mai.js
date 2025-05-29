@@ -76,7 +76,7 @@ slider.addEventListener("input", (e) => {
 })
 
 sortbutton.addEventListener('click', () => {
-    fetch(`https://sorting-visualizer-drab-xi.vercel.app/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
+    fetch(`/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
     // mergeSort(dict)
     // const el = document.getElementById("0")
     // el.id = 5
@@ -192,7 +192,7 @@ async function animateDepth(array, depth = 0) {
     if (depth >= 0) {
         var depthAnims = []
         bars.forEach((e) => {
-            const a = animate(e, { y: ((100 * depth) - olddepth) + olddepth, duration: 1000 })
+            const a = animate(e, { y: ((100 * depth) - olddepth) + olddepth, duration: dur*2 })
             depthAnims.push(a)
         })
         await Promise.all(depthAnims)
@@ -283,11 +283,11 @@ async function insersionSort(dict) {
             console.log(e["indices"][0])
             const bar1 = document.getElementById(e["indices"][0])
             const bar2 = document.getElementById(e["indices"][1])
-            animate(bar1, { backgroundColor: "#dc3545", duration: 500 })
-            animate(bar2, { backgroundColor: "#dc3545", duration: 500 })
-            await delay(500)
-            animate(bar1, { backgroundColor: "#26D6BB", duration: 500 })
-            animate(bar2, { backgroundColor: "#26D6BB", duration: 500 })
+            animate(bar1, { backgroundColor: "#dc3545", duration: dur })
+            animate(bar2, { backgroundColor: "#dc3545", duration: dur })
+            await delay(dur)
+            animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
+            animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
         }
     }
 }
@@ -306,11 +306,11 @@ async function quickSort(dict) {
             console.log(e.index)
             const bar1 = document.getElementById(e["index"][0])
             const bar2 = document.getElementById(e["index"][1])
-            animate(bar1, { backgroundColor: "#dc3545", duration: 500 })
-            animate(bar2, { backgroundColor: "#dc3545", duration: 500 })
-            await delay(500)
-            animate(bar1, { backgroundColor: "#26D6BB", duration: 500 })
-            animate(bar2, { backgroundColor: "#26D6BB", duration: 500 })
+            animate(bar1, { backgroundColor: "#dc3545", duration: dur })
+            animate(bar2, { backgroundColor: "#dc3545", duration: dur })
+            await delay(dur)
+            animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
+            animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
             animateDepth(e.index, e.depth)
         }
         else if (e["type"] == "split") {
@@ -334,11 +334,11 @@ async function bubbleSort(dict) {
             console.log(e["index"][0])
             const bar1 = document.getElementById(e["index"][0])
             const bar2 = document.getElementById(e["index"][1])
-            animate(bar1, { backgroundColor: "#dc3545", duration: 500 })
-            animate(bar2, { backgroundColor: "#dc3545", duration: 500 })
-            await delay(500)
-            animate(bar1, { backgroundColor: "#26D6BB", duration: 500 })
-            animate(bar2, { backgroundColor: "#26D6BB", duration: 500 })
+            animate(bar1, { backgroundColor: "#dc3545", duration: dur })
+            animate(bar2, { backgroundColor: "#dc3545", duration: dur })
+            await delay(dur)
+            animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
+            animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
             animateDepth(e.index, e.depth)
         }
         else if (e["type"] == "split") {
