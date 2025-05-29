@@ -5,7 +5,7 @@ var arr = [2, 6, 5, 1, 7, 4, 3, 0]
 // const dict ={"steps": [{'type': 'split', 'index': [0, 1, 2, 3, 4, 5, 6, 7], 'depth': 0}, {'type': 'split', 'index': [0, 1, 2, 3], 'depth': 1}, {'type': 'split', 'index': [0, 1], 'depth': 2}, {'type': 'split', 'index': [0], 'depth': 3}, {'type': 'split', 'index': [1], 'depth': 3}, {'type': 'swap', 'index': 0, 'depth': 2}, {'type': 'swap', 'index': 1, 'depth': 2}, {'type': 'merge', 'index': [0, 1], 'depth': 2}, {'type': 'split', 'index': [2, 3], 'depth': 2}, {'type': 'split', 'index': [2], 'depth': 3}, {'type': 'split', 'index': [3], 'depth': 3}, {'type': 'swap', 'index': 3, 'depth': 2}, {'type': 'swap', 'index': 2, 'depth': 2}, {'type': 'merge', 'index': [2, 3], 'depth': 2}, {'type': 'swap', 'index': 2, 'depth': 1}, {'type': 'swap', 'index': 0, 'depth': 1}, {'type': 'swap', 'index': 3, 'depth': 1}, {'type': 'swap', 'index': 1, 'depth': 1}, {'type': 'merge', 'index': [0, 1, 2, 3], 'depth': 1}, {'type': 'split', 'index': [4, 5, 6, 7], 'depth': 1}, {'type': 'split', 'index': [4, 5], 'depth': 2}, {'type': 'split', 'index': [4], 'depth': 3}, {'type': 'split', 'index': [5], 'depth': 3}, {'type': 'swap', 'index': 5, 'depth': 2}, {'type': 'swap', 'index': 4, 'depth': 2}, {'type': 'merge', 'index': [4, 5], 'depth': 2}, {'type': 'split', 'index': [6, 7], 'depth': 2}, {'type': 'split', 'index': [6], 'depth': 3}, {'type': 'split', 'index': [7], 'depth': 3}, {'type': 'swap', 'index': 7, 'depth': 2}, {'type': 'swap', 'index': 6, 'depth': 2}, {'type': 'merge', 'index': [6, 7], 'depth': 2}, {'type': 'swap', 'index': 6, 'depth': 1}, {'type': 'swap', 'index': 7, 'depth': 1}, {'type': 'swap', 'index': 4, 'depth': 1}, {'type': 'swap', 'index': 5, 'depth': 1}, {'type': 'merge', 'index': [4, 5, 6, 7], 'depth': 1}, {'type': 'swap', 'index': 4, 'depth': 0}, {'type': 'swap', 'index': 0, 'depth': 0}, {'type': 'swap', 'index': 1, 'depth': 0}, {'type': 'swap', 'index': 5, 'depth': 0}, {'type': 'swap', 'index': 6, 'depth': 0}, {'type': 'swap', 'index': 2, 'depth': 0}, {'type': 'swap', 'index': 3, 'depth': 0}, {'type': 'swap', 'index': 7, 'depth': 0}, {'type': 'merge', 'index': [0, 1, 2, 3, 4, 5, 6, 7], 'depth': 0}]};
 
 const barheight = 30, durationscale = 10
-var dur = 5
+var dur = 500
 var currentSort = "bubble"
 
 
@@ -77,7 +77,7 @@ slider.addEventListener("input", (e) => {
 })
 
 sortbutton.addEventListener('click', () => {
-    fetch(`/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
+    fetch(`http://127.0.0.1:5000/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
     // mergeSort(dict)
     // const el = document.getElementById("0")
     // el.id = 5
@@ -86,7 +86,7 @@ sortbutton.addEventListener('click', () => {
 genbutton.addEventListener('click', () => {
     console.log("h")
     arr = []
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 8; i++) {
         arr.push(Math.floor(Math.random() * 10))
     }
     // Math.floor(Math.random() * 10);
@@ -94,9 +94,7 @@ genbutton.addEventListener('click', () => {
     viewArray(arr)
 })
 
-insbutton.addEventListener("click", () => {
 
-})
 
 //* creates the array on the website
 function viewArray(array) {
@@ -118,7 +116,7 @@ function viewArray(array) {
         container.appendChild(bar)
 
         //* animate height
-        animate(bar, { height: (barheight * i) + 10 })
+        animate(bar, { height: (barheight * i) + 25 })
     });
 
 }
@@ -235,7 +233,7 @@ async function mergeSort(dict) {
         if (e["type"] == "swap") {
             console.log('swap')
 
-             animateSwap(getElem(depthstart[e.depth]).id, e.index, true)
+            await animateSwap(getElem(depthstart[e.depth]).id, e.index, true)
             animateDepth([e.index], e.depth);
             depthstart[e.depth]++;
             await delay(dur)
@@ -423,4 +421,16 @@ document.getElementById("InsertArray").addEventListener("click", () => {
     document.getElementById("popup").style.display = "none";
     document.getElementById("opacity").style.display = "none";
     document.body.style.overflow = "auto"
+
+    const input = document.getElementById("inputArray").value.trim();
+    arr = input.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
+    console.log(input)
+    if (arr.length === 0) {
+        alert("Please enter a valid array.");
+        return;
+    }
+    else{
+        // const frame = document.querySelector(`#${e.value}-container`)
+        viewArray(arr)
+    }
 });
