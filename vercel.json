@@ -11,7 +11,7 @@
     {
       "src": "bonus.html",
       "use": "@vercel/static"
-    }
+    },
     {
       "src": "*",
       "use": "@vercel/static"
