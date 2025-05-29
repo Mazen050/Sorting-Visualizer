@@ -1,11 +1,11 @@
 import { animate, createSpring } from 'https://cdn.jsdelivr.net/npm/animejs/+esm';
 
 var arr = [2, 6, 5, 1, 7, 4, 3, 0]
-var arr_2 = [2, 6, 5, 1, 7, 4, 3, 0]
+// var arr_2 = [2, 6, 5, 1, 7, 4, 3, 0]
 
-const dict = {'steps': [{'type': 'new_min', 'min_index': 0}, {'type': 'compare', 'index': [1, 0]}, {'type': 'compare', 'index': [2, 0]}, {'type': 'compare', 'index': [3, 0]}, {'type': 'new_min', 'min_index': 3}, {'type': 'compare', 'index': [4, 3]}, {'type': 'compare', 'index': [5, 3]}, {'type': 'compare', 'index': [6, 3]}, {'type': 'compare', 'index': [7, 3]}, {'type': 'new_min', 'min_index': 7}, {'type': 'swap', 'index': [0, 7]}, {'type': 'new_min', 'min_index': 1}, {'type': 'compare', 'index': [2, 1]}, {'type': 'new_min', 'min_index': 2}, {'type': 'compare', 'index': [3, 2]}, {'type': 'new_min', 'min_index': 3}, {'type': 'compare', 'index': [4, 3]}, {'type': 'compare', 'index': [5, 3]}, {'type': 'compare', 'index': [6, 3]}, {'type': 'compare', 'index': [7, 3]}, {'type': 'swap', 'index': [1, 3]}, {'type': 'new_min', 'min_index': 2}, {'type': 'compare', 'index': [3, 2]}, {'type': 'compare', 'index': [4, 2]}, {'type': 'compare', 'index': [5, 2]}, {'type': 'new_min', 'min_index': 5}, {'type': 'compare', 'index': [6, 5]}, {'type': 'new_min', 'min_index': 6}, {'type': 'compare', 'index': [7, 6]}, {'type': 'new_min', 'min_index': 7}, {'type': 'swap', 'index': [2, 7]}, {'type': 'new_min', 'min_index': 3}, {'type': 'compare', 'index': [4, 3]}, {'type': 'compare', 'index': [5, 3]}, {'type': 'new_min', 'min_index': 5}, {'type': 'compare', 'index': [6, 5]}, {'type': 'new_min', 'min_index': 6}, {'type': 'compare', 'index': [7, 6]}, {'type': 'swap', 'index': [3, 6]}, {'type': 'new_min', 'min_index': 4}, {'type': 'compare', 'index': [5, 4]}, {'type': 'new_min', 'min_index': 5}, {'type': 'compare', 'index': [6, 5]}, {'type': 'compare', 'index': [7, 5]}, {'type': 'swap', 'index': [4, 5]}, {'type': 'new_min', 'min_index': 5}, {'type': 'compare', 'index': [6, 5]}, {'type': 'new_min', 'min_index': 6}, {'type': 'compare', 'index': [7, 6]}, {'type': 'new_min', 'min_index': 7}, {'type': 'swap', 'index': [5, 7]}, {'type': 'new_min', 'min_index': 6}, {'type': 'compare', 'index': [7, 6]}, {'type': 'no_swap', 'index': 6}, {'type': 'new_min', 'min_index': 7}, {'type': 'no_swap', 'index': 7}]}
+// const dict = {'steps': [{'type': 'new_min', 'min_index': 0}, {'type': 'compare', 'index': [1, 0]}, {'type': 'compare', 'index': [2, 0]}, {'type': 'compare', 'index': [3, 0]}, {'type': 'new_min', 'min_index': 3}, {'type': 'compare', 'index': [4, 3]}, {'type': 'compare', 'index': [5, 3]}, {'type': 'compare', 'index': [6, 3]}, {'type': 'compare', 'index': [7, 3]}, {'type': 'new_min', 'min_index': 7}, {'type': 'swap', 'index': [0, 7]}, {'type': 'new_min', 'min_index': 1}, {'type': 'compare', 'index': [2, 1]}, {'type': 'new_min', 'min_index': 2}, {'type': 'compare', 'index': [3, 2]}, {'type': 'new_min', 'min_index': 3}, {'type': 'compare', 'index': [4, 3]}, {'type': 'compare', 'index': [5, 3]}, {'type': 'compare', 'index': [6, 3]}, {'type': 'compare', 'index': [7, 3]}, {'type': 'swap', 'index': [1, 3]}, {'type': 'new_min', 'min_index': 2}, {'type': 'compare', 'index': [3, 2]}, {'type': 'compare', 'index': [4, 2]}, {'type': 'compare', 'index': [5, 2]}, {'type': 'new_min', 'min_index': 5}, {'type': 'compare', 'index': [6, 5]}, {'type': 'new_min', 'min_index': 6}, {'type': 'compare', 'index': [7, 6]}, {'type': 'new_min', 'min_index': 7}, {'type': 'swap', 'index': [2, 7]}, {'type': 'new_min', 'min_index': 3}, {'type': 'compare', 'index': [4, 3]}, {'type': 'compare', 'index': [5, 3]}, {'type': 'new_min', 'min_index': 5}, {'type': 'compare', 'index': [6, 5]}, {'type': 'new_min', 'min_index': 6}, {'type': 'compare', 'index': [7, 6]}, {'type': 'swap', 'index': [3, 6]}, {'type': 'new_min', 'min_index': 4}, {'type': 'compare', 'index': [5, 4]}, {'type': 'new_min', 'min_index': 5}, {'type': 'compare', 'index': [6, 5]}, {'type': 'compare', 'index': [7, 5]}, {'type': 'swap', 'index': [4, 5]}, {'type': 'new_min', 'min_index': 5}, {'type': 'compare', 'index': [6, 5]}, {'type': 'new_min', 'min_index': 6}, {'type': 'compare', 'index': [7, 6]}, {'type': 'new_min', 'min_index': 7}, {'type': 'swap', 'index': [5, 7]}, {'type': 'new_min', 'min_index': 6}, {'type': 'compare', 'index': [7, 6]}, {'type': 'no_swap', 'index': 6}, {'type': 'new_min', 'min_index': 7}, {'type': 'no_swap', 'index': 7}]}
 
-const dict_2 = { "steps": [{ 'type': 'split', 'index': [0, 1, 2, 3, 4, 5, 6, 7], 'depth': 0 }, { 'type': 'split', 'index': [0, 1, 2, 3], 'depth': 1 }, { 'type': 'split', 'index': [0, 1], 'depth': 2 }, { 'type': 'split', 'index': [0], 'depth': 3 }, { 'type': 'split', 'index': [1], 'depth': 3 }, { 'type': 'swap', 'index': 0, 'depth': 2 }, { 'type': 'swap', 'index': 1, 'depth': 2 }, { 'type': 'merge', 'index': [0, 1], 'depth': 2 }, { 'type': 'split', 'index': [2, 3], 'depth': 2 }, { 'type': 'split', 'index': [2], 'depth': 3 }, { 'type': 'split', 'index': [3], 'depth': 3 }, { 'type': 'swap', 'index': 3, 'depth': 2 }, { 'type': 'swap', 'index': 2, 'depth': 2 }, { 'type': 'merge', 'index': [2, 3], 'depth': 2 }, { 'type': 'swap', 'index': 2, 'depth': 1 }, { 'type': 'swap', 'index': 0, 'depth': 1 }, { 'type': 'swap', 'index': 3, 'depth': 1 }, { 'type': 'swap', 'index': 1, 'depth': 1 }, { 'type': 'merge', 'index': [0, 1, 2, 3], 'depth': 1 }, { 'type': 'split', 'index': [4, 5, 6, 7], 'depth': 1 }, { 'type': 'split', 'index': [4, 5], 'depth': 2 }, { 'type': 'split', 'index': [4], 'depth': 3 }, { 'type': 'split', 'index': [5], 'depth': 3 }, { 'type': 'swap', 'index': 5, 'depth': 2 }, { 'type': 'swap', 'index': 4, 'depth': 2 }, { 'type': 'merge', 'index': [4, 5], 'depth': 2 }, { 'type': 'split', 'index': [6, 7], 'depth': 2 }, { 'type': 'split', 'index': [6], 'depth': 3 }, { 'type': 'split', 'index': [7], 'depth': 3 }, { 'type': 'swap', 'index': 7, 'depth': 2 }, { 'type': 'swap', 'index': 6, 'depth': 2 }, { 'type': 'merge', 'index': [6, 7], 'depth': 2 }, { 'type': 'swap', 'index': 6, 'depth': 1 }, { 'type': 'swap', 'index': 7, 'depth': 1 }, { 'type': 'swap', 'index': 4, 'depth': 1 }, { 'type': 'swap', 'index': 5, 'depth': 1 }, { 'type': 'merge', 'index': [4, 5, 6, 7], 'depth': 1 }, { 'type': 'swap', 'index': 4, 'depth': 0 }, { 'type': 'swap', 'index': 0, 'depth': 0 }, { 'type': 'swap', 'index': 1, 'depth': 0 }, { 'type': 'swap', 'index': 5, 'depth': 0 }, { 'type': 'swap', 'index': 6, 'depth': 0 }, { 'type': 'swap', 'index': 2, 'depth': 0 }, { 'type': 'swap', 'index': 3, 'depth': 0 }, { 'type': 'swap', 'index': 7, 'depth': 0 }, { 'type': 'merge', 'index': [0, 1, 2, 3, 4, 5, 6, 7], 'depth': 0 }] };
+// const dict_2 = { "steps": [{ 'type': 'split', 'index': [0, 1, 2, 3, 4, 5, 6, 7], 'depth': 0 }, { 'type': 'split', 'index': [0, 1, 2, 3], 'depth': 1 }, { 'type': 'split', 'index': [0, 1], 'depth': 2 }, { 'type': 'split', 'index': [0], 'depth': 3 }, { 'type': 'split', 'index': [1], 'depth': 3 }, { 'type': 'swap', 'index': 0, 'depth': 2 }, { 'type': 'swap', 'index': 1, 'depth': 2 }, { 'type': 'merge', 'index': [0, 1], 'depth': 2 }, { 'type': 'split', 'index': [2, 3], 'depth': 2 }, { 'type': 'split', 'index': [2], 'depth': 3 }, { 'type': 'split', 'index': [3], 'depth': 3 }, { 'type': 'swap', 'index': 3, 'depth': 2 }, { 'type': 'swap', 'index': 2, 'depth': 2 }, { 'type': 'merge', 'index': [2, 3], 'depth': 2 }, { 'type': 'swap', 'index': 2, 'depth': 1 }, { 'type': 'swap', 'index': 0, 'depth': 1 }, { 'type': 'swap', 'index': 3, 'depth': 1 }, { 'type': 'swap', 'index': 1, 'depth': 1 }, { 'type': 'merge', 'index': [0, 1, 2, 3], 'depth': 1 }, { 'type': 'split', 'index': [4, 5, 6, 7], 'depth': 1 }, { 'type': 'split', 'index': [4, 5], 'depth': 2 }, { 'type': 'split', 'index': [4], 'depth': 3 }, { 'type': 'split', 'index': [5], 'depth': 3 }, { 'type': 'swap', 'index': 5, 'depth': 2 }, { 'type': 'swap', 'index': 4, 'depth': 2 }, { 'type': 'merge', 'index': [4, 5], 'depth': 2 }, { 'type': 'split', 'index': [6, 7], 'depth': 2 }, { 'type': 'split', 'index': [6], 'depth': 3 }, { 'type': 'split', 'index': [7], 'depth': 3 }, { 'type': 'swap', 'index': 7, 'depth': 2 }, { 'type': 'swap', 'index': 6, 'depth': 2 }, { 'type': 'merge', 'index': [6, 7], 'depth': 2 }, { 'type': 'swap', 'index': 6, 'depth': 1 }, { 'type': 'swap', 'index': 7, 'depth': 1 }, { 'type': 'swap', 'index': 4, 'depth': 1 }, { 'type': 'swap', 'index': 5, 'depth': 1 }, { 'type': 'merge', 'index': [4, 5, 6, 7], 'depth': 1 }, { 'type': 'swap', 'index': 4, 'depth': 0 }, { 'type': 'swap', 'index': 0, 'depth': 0 }, { 'type': 'swap', 'index': 1, 'depth': 0 }, { 'type': 'swap', 'index': 5, 'depth': 0 }, { 'type': 'swap', 'index': 6, 'depth': 0 }, { 'type': 'swap', 'index': 2, 'depth': 0 }, { 'type': 'swap', 'index': 3, 'depth': 0 }, { 'type': 'swap', 'index': 7, 'depth': 0 }, { 'type': 'merge', 'index': [0, 1, 2, 3, 4, 5, 6, 7], 'depth': 0 }] };
 
 
 const barheight = 30
@@ -27,7 +27,7 @@ sortbutton.addEventListener('click', () => {
         if(e.checked){
             const frame = document.querySelector(`#${e.value}-container`)
             console.log(frame)
-            fetch(`/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
+            fetch(`http://127.0.0.1:5000/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
         }
     })
 
@@ -152,8 +152,8 @@ async function animateSwap(bar1,bar2,merge,document){
         bar2.style.transform = `translateX(0px) translateY(${y2}px)`;
 
         
-        animate(bar1,{backgroundColor:"#FFCC2A",duration:dur})
-        animate(bar2,{backgroundColor:"#FFCC2A",duration:dur})
+        animate(bar1,{backgroundColor:"#26D6BB",duration:dur})
+        animate(bar2,{backgroundColor:"#26D6BB",duration:dur})
         
 
 }
@@ -301,19 +301,19 @@ async function selectionSort(dict,document){
             animate(bar1,{backgroundColor:"#dc3545",duration:dur})
             animate(bar2,{backgroundColor:"#dc3545",duration:dur})
             await delay(dur)
-            animate(bar1,{backgroundColor:"#FFCC2A",duration:dur})
-            animate(bar2,{backgroundColor:"#FFCC2A",duration:dur})
+            animate(bar1,{backgroundColor:"#26D6BB",duration:dur})
+            animate(bar2,{backgroundColor:"#26D6BB",duration:dur})
             animateDepth(e.index,e.depth,document)
         }
         else if(e["type"] == "new_min"){
             console.log(prevminidx)
             const bar1 = document.querySelector(`[id="${e["min_index"]}"]`)
             await animate(bar1,{backgroundColor:"#008000",duration:350})
-            await animate(prevminidx,{backgroundColor:"#FFCC2A",duration:dur})
+            await animate(prevminidx,{backgroundColor:"#26D6BB",duration:dur})
             prevminidx = bar1
         }
     }
-    await animate(prevminidx,{backgroundColor:"#FFCC2A",duration:dur})
+    await animate(prevminidx,{backgroundColor:"#26D6BB",duration:dur})
 }
 
 async function mergeSort(dict,document){
@@ -437,12 +437,23 @@ document.getElementById("InsertArray").addEventListener("click", () => {
 
 
 document.getElementById("InsertArray").addEventListener("click", () => {
-    const input = document.getElementById("input").value.trim;
+    const input = document.getElementById("inputArray").value.trim();
     const array = input.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
-
+    console.log(array)
     if (array.length === 0) {
         alert("Please enter a valid array.");
         return;
+    }
+    else{
+        const checkboxs = document.querySelectorAll(".algo-checkbox")
+
+        checkboxs.forEach((e)=>{
+            if(e.checked){
+                const frame = document.querySelector(`#${e.value}-container`)
+                console.log(frame)
+                viewArray(array,`#${e.value}-container`)
+            }
+        })
     }
 
     // document.getElementById("popup").style.display = "none";
