@@ -1,6 +1,38 @@
 {
-  "rewrites": [
-    { "source": "/bubble", "destination": "/api/test" }
-    { "source": "/", "destination": "/tes.html" }
+  "builds": [
+    {
+      "src": "api/test.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "tes.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "bonus.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/test",
+      "dest": "api/test.py"
+    },
+    {
+      "src": "tes.html",
+      "dest": "/"
+    },
+    {
+      "src": "bonus.html",
+      "dest": "/bonus"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html"
+    }
   ]
 }
