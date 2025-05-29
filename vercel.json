@@ -20,7 +20,7 @@
   ],
   "routes": [
     {
-      "src": "/api/test",
+      "src": "/api/(.*)",
       "dest": "api/test.py"
     },
     {
