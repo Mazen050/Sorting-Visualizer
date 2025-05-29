@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/bubble",methods = ["POST"])
+@app.route("/api/bubble",methods = ["POST"])
 def mahmoud():
     array = request.get_json()["array"] # array parameter coming from website
     logs = {}                           # record steps here
