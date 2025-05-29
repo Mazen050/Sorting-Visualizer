@@ -1,0 +1,69 @@
+body {
+    background-color: #121212;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+.header {
+    font-size: 2.5rem;
+    color: #00BFA6;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.compare-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.checkboxes {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.2rem;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.b1 {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #00BFA6;
+    color: #121212;
+    font-weight: bold;
+}
+
+.b1:hover {
+    background-color: #26D6BB;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 191, 166, 0.3);
+}
+
+.results {
+    background-color: #1E1E1E;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.result-card {
+    background-color: #2A2A2A;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}

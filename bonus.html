@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bonus.css">
+
+</head>
+
+<body>
+    <div id="opacity"></div>
+    <h1 class="header">Sorting Visualization</h1>
+
+    <div class="checkboxes" style="color: white; text-align: center; margin-top: 20px;">
+        <label><input type="checkbox" class="algo-checkbox" value="selection"> Selection Sort</label>
+        <label><input type="checkbox" class="algo-checkbox" value="merge"> Merge Sort</label>
+        <label><input type="checkbox" class="algo-checkbox" value="quick"> Quick Sort</label>
+        <label><input type="checkbox" class="algo-checkbox" value="insertion"> Insertion Sort</label>
+        <label><input type="checkbox" class="algo-checkbox" value="bubble"> Bubble Sort</label>
+    </div>
+
+    <!-- <div class="div">
+        <div class="frame">
+            <div class="container">
+            </div>
+        </div>
+    </div> -->
+    <div class="buttons">
+        <div class="combined-buttons">
+            <button class="b1" id="sort">Sort</button>
+            <button class="b1" id="ins">Insert</button>
+            <button class="b1" id="gen">Generate</button>
+            <a href="html.html" class="b1">Compare</a>
+        </div>
+    </div>
+
+    <div class="div">
+        <div class="frames-wrapper">
+            <!-- <div class="frame" id="Bubble-frame">
+                <div class="container" id="Bubble-container"></div>
+            </div>
+            <div class="frame" id="Selection-frame" style="display: none;">
+                <div class="container" id="Selection-container"></div> -->
+        </div>
+    </div>
+    </div>
+
+    <!-- NEW -->
+    <div id="popup">
+        <label for="inputArray">Enter array (comma separated):</label><br>
+        <input type="text" id="inputArray" placeholder="e.g. 1,2,3,4">
+        <div class="popup-buttons">
+            <button id="InsertArray" class="b1">Add</button>
+            <button id="closePopup" class="b1">Cancel</button>
+        </div>
+    </div>
+
+    <script type="module" src="bonus.js"></script>
+</body>
+
+</html>

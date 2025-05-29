@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="c.css">
+
+</head>
+
+<body>
+    <div id="opacity"></div>
+    <h1 class="header">Sorting Visualization: [BUBBLE SORT]</h1>
+    <div class="div">
+        <div class="frame">
+            <div class="container">
+            </div>
+        </div>
+    </div>
+    <div class="buttons">
+
+        <button class="b1" id="sort">Sort</button>
+        <div class="other">
+            <!-- <button class="b1" id="bubble">Bubble</button> -->
+            <button class="b1 type" id="selection">Selection</button>
+            <button class="b1 type" id="insertion">Insertion</button>
+            <button class="b1 type" id="quick">Quick</button>
+            <button class="b1 type" id="merge">Merge</button>
+        </div>
+        <div class="options">
+            <button class="b1 option" id="ins">Insert</button>
+            <button class="b1 option" id="gen">Generate</button>
+            <button class="b1 option" id="compare">Compare</button>
+        </div>
+        <div class="slidercontainer">
+            <h2 class="speed">Speed: 50</h2>
+            <div class="slider">
+                <input type="range" class="theslider" min="1" max="100" value="50">
+            </div>
+        </div>
+    </div>
+
+    <div id="popup">
+        <label for="inputArray">Enter array (comma separated):</label><br>
+        <input type="text" id="inputArray" placeholder="e.g. 1,2,3,4">
+        <div class="popup-buttons">
+            <button id="InsertArray" class="b1">Add</button>
+            <button id="closePopup" class="b1">Cancel</button>
+        </div>
+    </div>
+    <!-- <script type="module" src="javas.js"></script> -->
+    <!-- <script type="module" src="ja(workinganime).js"></script> -->
+    <!-- <script type="module" src="javaquick.js"></script> -->
+    <!-- <script type="module" src="javabubble.js"></script> -->
+    <!-- <script type="module" src="javaselect.js"></script> -->
+    <script type="module" src="mai.js"></script>
+
+</body>
+
+</html>
