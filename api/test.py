@@ -208,6 +208,7 @@ def merge_sort(arr,depth,steps,indx):
         mergedIndex = 0
         
         while leftIndex < len(l) and rightIndex<len(r):
+            steps["steps"].append({"type":"compare","index":[idxl[leftIndex],idxr[rightIndex]],"depth":depth})
             if l[leftIndex]>r[rightIndex]:
                 steps["steps"].append({"type":"swap","index":idxr[rightIndex],"depth":depth})
                 arr[mergedIndex]=r[rightIndex]
