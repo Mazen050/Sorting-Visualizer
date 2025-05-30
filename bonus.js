@@ -183,8 +183,9 @@ async function animateDepth(array, depth = 0,document) {
 
 }
 //* gets the order of a number in the array in the flexbos container
-function getOrder(num) {
-    const el = document.getElementById(num)
+function getOrder(num,document) {
+    // const el = document.getElementById(num)
+    const el = document.querySelector(`[id="${num}"]`)
     const order = getComputedStyle(el).order
     return order;
 }
@@ -232,15 +233,26 @@ async function bubbleSort(dict,document) {
 }
 
 
+var compares = 0,swap=0
+const framewrap = document.querySelector(".frames-wrapper")
 async function insersionSort(dict,document) {
+    const frame = framewrap.querySelector("#insertion-frame")
     for (const e of dict.steps) {
-        console.log(e)
+        timer++
+        console.log(timer)
         if (e["type"] == "swap") {
+            swap++
+            const com = frame.querySelector(".bottom-right")
+            com.innerHTML = "Swaps: "+swap
             console.log('swap')
             await animateSwap(e.indices[0], e.indices[1],false,document)
             await delay(dur)
         }
         else if (e["type"] == "compare") {
+            compares++
+            const com = frame.querySelector(".bottom-left")
+            com.innerHTML = "Compares: "+compares
+
             console.log("split")
             console.log(e["indices"][0])
             const bar1 = document.querySelector(`[id="${e["indices"][0]}"]`)
@@ -252,6 +264,7 @@ async function insersionSort(dict,document) {
             animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
         }
     }
+    time= false
 }
 
 async function quickSort(dict,document) {
@@ -291,7 +304,7 @@ async function selectionSort(dict,document){
             console.log(e.index)
             await animateSwap(e.index[0],e.index[1],false,document)
             await delay(dur)
-            animateDepth(e.index,e.depth,document)
+            // animateDepth(e.index,e.depth,document)
         }
         else if(e["type"] === "compare"){
             console.log("split")
@@ -303,7 +316,7 @@ async function selectionSort(dict,document){
             await delay(dur)
             animate(bar1,{backgroundColor:"#26D6BB",duration:dur})
             animate(bar2,{backgroundColor:"#26D6BB",duration:dur})
-            animateDepth(e.index,e.depth,document)
+            // animateDepth(e.index,e.depth,document)
         }
         else if(e["type"] == "new_min"){
             console.log(prevminidx)
@@ -331,7 +344,7 @@ async function mergeSort(dict,document){
         else if(e["type"] == "split"){
             console.log("split")
 
-            depthstart[e["depth"]] = getOrder(e.index[0]); 
+            depthstart[e["depth"]] = getOrder(e.index[0],document); 
             animateDepth(e["index"],e["depth"],document);
             await delay(dur)
         }
@@ -438,9 +451,9 @@ document.getElementById("InsertArray").addEventListener("click", () => {
 
 document.getElementById("InsertArray").addEventListener("click", () => {
     const input = document.getElementById("inputArray").value.trim();
-    const array = input.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
-    console.log(array)
-    if (array.length === 0) {
+    arr = input.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
+    console.log(arr)
+    if (arr.length === 0) {
         alert("Please enter a valid array.");
         return;
     }
@@ -451,7 +464,8 @@ document.getElementById("InsertArray").addEventListener("click", () => {
             if(e.checked){
                 const frame = document.querySelector(`#${e.value}-container`)
                 console.log(frame)
-                viewArray(array,frame)
+                
+                viewArray(arr,`#${e.value}-container`)
             }
         })
     }
