@@ -27,7 +27,7 @@ sortbutton.addEventListener('click', () => {
         if(e.checked){
             const frame = document.querySelector(`#${e.value}-container`)
             console.log(frame)
-            fetch(`/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
+            fetch(`http://127.0.0.1:5000/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
         }
     })
 
@@ -451,7 +451,7 @@ document.getElementById("InsertArray").addEventListener("click", () => {
             if(e.checked){
                 const frame = document.querySelector(`#${e.value}-container`)
                 console.log(frame)
-                viewArray(array,`#${e.value}-container`)
+                viewArray(array,frame)
             }
         })
     }
