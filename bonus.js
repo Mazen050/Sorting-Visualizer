@@ -27,7 +27,7 @@ sortbutton.addEventListener('click', () => {
         if(e.checked){
             const frame = document.querySelector(`#${e.value}-container`)
             console.log(frame)
-            fetch(`/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
+            fetch(`http://127.0.0.1:5000/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
         }
     })
 
@@ -397,8 +397,24 @@ async function mergeSort(dict,document){
             // bar1.id = bar2.id;
             // bar2.id = tempid;
             // await animateSwap(depthstart[e["depth"]],e["index"])
-            await delay(1000)
+            // await delay(1000)
         }
+        else if(e["type"] == "compare"){
+            compares2++
+            const com = frame.querySelector(".bottom-left")
+            com.innerHTML = "Compares: "+compares2
+
+            console.log("compare")
+            const bar1 = document.querySelector(`[id="${e["index"][0]}"]`)
+            const bar2 = document.querySelector(`[id="${e["index"][1]}"]`)
+
+            animate(bar1, { backgroundColor: "#dc3545", duration: dur })
+            animate(bar2, { backgroundColor: "#dc3545", duration: dur })
+            await delay(dur)
+            animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
+            animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
+        }
+        
     }
 }
 // viewArray(arr)
