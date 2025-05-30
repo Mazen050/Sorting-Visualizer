@@ -78,75 +78,10 @@ We knew that each method had advantages and disadvantages, and through it we wer
 ![image](https://github.com/user-attachments/assets/e8786b65-281d-4205-bae0-6466a65dfc23)
 
 
-Space Complexity	Worst Case Time	
-Average Case Time
-	Best Case Time	Algorithm
-O(1)	O(n²)	O(n²)	O(n)	Bubble Sort
-O(1)	O(n²)	O(n²)	O(n²)	Selection Sort
-O(1)	O(n²)	O(n²)	O(n)	Insertion Sort
-O(log n)	O(n²)	O(n log n)	O(n log n)	Quick Sort
-O(n)	O(n log n)	O(n log n)	O(n log n)	Merge Sort
-
-
 Space Complexity
 
-Worst Case Time
+![image](https://github.com/user-attachments/assets/cd19c756-c29b-47f3-8286-dada5e9db53f)
 
-Average Case Time
-
-Best Case Time
-
-**Algorithm**
-
-O(1)
-
-O(n²)
-
-O(n²)
-
-O(n)
-
-Bubble Sort
-
-O(1)
-
-O(n²)
-
-O(n²)
-
-O(n²)
-
-Selection Sort
-
-O(1)
-
-O(n²)
-
-O(n²)
-
-O(n)
-
-Insertion Sort
-
-O(log n)
-
-O(n²)
-
-O(n log n)
-
-O(n log n)
-
-Quick Sort
-
-O(n)
-
-O(n log n)
-
-O(n log n)
-
-O(n log n)
-
-Merge Sort
 
 **Summary**
 
