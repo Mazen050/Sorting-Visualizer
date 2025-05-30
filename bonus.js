@@ -19,7 +19,7 @@ const insbutton = document.querySelector("#ins")
 
 
 sortbutton.addEventListener('click', () => {
-    fetch("http://127.0.0.1:5000/merge",{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mergeSort(text))
+
     
     const checkboxs = document.querySelectorAll(".algo-checkbox")
 
