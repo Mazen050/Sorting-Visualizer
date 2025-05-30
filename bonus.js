@@ -19,7 +19,7 @@ const insbutton = document.querySelector("#ins")
 
 
 sortbutton.addEventListener('click', () => {
-    // fetch("http://127.0.0.1:5000/merge",{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mergeSort(text))
+    fetch("http://127.0.0.1:5000/merge",{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mergeSort(text))
     
     const checkboxs = document.querySelectorAll(".algo-checkbox")
 
@@ -27,7 +27,7 @@ sortbutton.addEventListener('click', () => {
         if(e.checked){
             const frame = document.querySelector(`#${e.value}-container`)
             console.log(frame)
-            fetch(`http://127.0.0.1:5000/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
+            fetch(`/api/${e.value}`,{method : "POST", headers: { "Content-Type": "application/json" }, body:JSON.stringify({"array":arr})}).then((r)=>r.json()).then(text => mainSort(e.value,text,frame))
         }
     })
 
@@ -207,17 +207,25 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
+var compares1 = 0,swap1=0
+const framewrap1 = document.querySelector(".frames-wrapper")
 async function bubbleSort(dict,document) {
+    const frame = framewrap1.querySelector("#bubble-frame")
     for (const e of dict.steps) {
         console.log(e)
         if (e["type"] == "swap") {
+            swap1++
+            const com = frame.querySelector(".bottom-right")
+            com.innerHTML = "Swaps: "+swap1
             console.log('swap')
             await animateSwap(e.index[0], e.index[1],false,document)
             await delay(dur)
             // animateDepth(e.index, e.depth)
         }
         else if (e["type"] == "compare") {
+            compares1++
+            const com = frame.querySelector(".bottom-left")
+            com.innerHTML = "Compares: "+compares1
             console.log("split")
             console.log(e["index"][0])
             const bar1 = document.querySelector(`[id="${e["index"][0]}"]`)
@@ -238,8 +246,6 @@ const framewrap = document.querySelector(".frames-wrapper")
 async function insersionSort(dict,document) {
     const frame = framewrap.querySelector("#insertion-frame")
     for (const e of dict.steps) {
-        timer++
-        console.log(timer)
         if (e["type"] == "swap") {
             swap++
             const com = frame.querySelector(".bottom-right")
@@ -264,19 +270,26 @@ async function insersionSort(dict,document) {
             animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
         }
     }
-    time= false
 }
-
+var compares2 = 0,swap2=0
+const framewrap2 = document.querySelector(".frames-wrapper")
 async function quickSort(dict,document) {
+    const frame = framewrap2.querySelector("#quick-frame")
     for (const e of dict.steps) {
         console.log(e)
         if (e["type"] == "swap") {
+            swap2++
+            const com = frame.querySelector(".bottom-right")
+            com.innerHTML = "Swaps: "+swap2
             console.log('swap')
             await animateSwap(e.index[0], e.index[1],false,document)
             await delay(dur)
             animateDepth(e.index, e.depth)
         }
         else if (e["type"] == "compare") {
+            compares2++
+            const com = frame.querySelector(".bottom-left")
+            com.innerHTML = "Compares: "+compares2
             console.log("split")
             console.log(e.index)
             const bar1 = document.querySelector(`[id="${e["index"][0]}"]`)
@@ -295,11 +308,17 @@ async function quickSort(dict,document) {
 }
 
 //* reads the dictionary sent to it and animates the sorting algo
+var compares3 = 0,swap3=0
+const framewrap3 = document.querySelector(".frames-wrapper")
 async function selectionSort(dict,document){
+    const frame = framewrap3.querySelector("#selection-frame")
     let prevminidx;
     for(const e of dict.steps){
         console.log(e)
         if(e["type"] === "swap"){
+            swap3++
+            const com = frame.querySelector(".bottom-right")
+            com.innerHTML = "Swaps: "+swap3
             console.log('swap')
             console.log(e.index)
             await animateSwap(e.index[0],e.index[1],false,document)
@@ -307,6 +326,9 @@ async function selectionSort(dict,document){
             // animateDepth(e.index,e.depth,document)
         }
         else if(e["type"] === "compare"){
+            compares3++
+            const com = frame.querySelector(".bottom-left")
+            com.innerHTML = "Compares: "+compares3
             console.log("split")
             console.log(e["index"][0])
             const bar1 = document.querySelector(`[id="${e["index"][0]}"]`)
@@ -328,12 +350,17 @@ async function selectionSort(dict,document){
     }
     await animate(prevminidx,{backgroundColor:"#26D6BB",duration:dur})
 }
-
+var compares4 = 0,swap4=0
+const framewrap4 = document.querySelector(".frames-wrapper")
 async function mergeSort(dict,document){
     var depthstart = {}
+    const frame = framewrap4.querySelector("#merge-frame")
     for(const e of dict.steps){
         console.log(e)
         if(e["type"] == "swap"){
+            swap4++
+            const com = frame.querySelector(".bottom-right")
+            com.innerHTML = "Swaps: "+swap4
             console.log('swap')
 
             await animateSwap(getElem(depthstart[e.depth],document).id,e.index,true,document)
