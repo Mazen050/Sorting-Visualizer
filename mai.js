@@ -78,7 +78,7 @@ slider.addEventListener("input", (e) => {
 })
 
 sortbutton.addEventListener('click', () => {
-    fetch(`/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
+    fetch(`http://127.0.0.1:5000/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
     // mergeSort(dict)
     // const el = document.getElementById("0")
     // el.id = 5
@@ -277,6 +277,16 @@ async function mergeSort(dict) {
             // bar2.id = tempid;
             // await animateSwap(depthstart[e["depth"]],e["index"])
             await delay(1000)
+        }
+        else if(e["type"] == "compare"){
+            console.log("compare")
+            const bar1 = document.getElementById(e["index"][0])
+            const bar2 = document.getElementById(e["index"][1])
+            animate(bar1, { backgroundColor: "#dc3545", duration: dur })
+            animate(bar2, { backgroundColor: "#dc3545", duration: dur })
+            await delay(dur)
+            animate(bar1, { backgroundColor: "#26D6BB", duration: dur })
+            animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
         }
     }
     stop = 0
