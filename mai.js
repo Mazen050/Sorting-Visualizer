@@ -7,7 +7,7 @@ var arr = [2, 6, 5, 1, 7, 4, 3, 0]
 const barheight = 30, durationscale = 10
 var dur = 500
 var currentSort = "bubble"
-
+var stop=0
 
 const sortbutton = document.querySelector("#sort")
 const genbutton = document.querySelector("#gen")
@@ -31,6 +31,7 @@ function refresh() {
             currentSort = e.innerHTML.toLowerCase()
             e.innerText = s.charAt(0).toUpperCase() + s.slice(1);
             document.querySelector(".header").innerHTML = `Sorting Visualization: [${currentSort.toUpperCase()} SORT]`
+            viewArray(arr)
         })
     })
 }
@@ -77,13 +78,13 @@ slider.addEventListener("input", (e) => {
 })
 
 sortbutton.addEventListener('click', () => {
-    fetch(`/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
+    fetch(`http://127.0.0.1:5000/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
     // mergeSort(dict)
     // const el = document.getElementById("0")
     // el.id = 5
 })
 
-genbutton.addEventListener('click', () => {
+genbutton.addEventListener('click', async () => {
     console.log("h")
     arr = []
     for (var i = 0; i < 8; i++) {
@@ -91,6 +92,10 @@ genbutton.addEventListener('click', () => {
     }
     // Math.floor(Math.random() * 10);
     // arr = [Math.floor(Math.random() * 10),Math.floor(Math.random() * 10),Math.floor(Math.random() * 10),Math.floor(Math.random() * 10),Math.floor(Math.random() * 10)]
+    if(stop === 1){
+        stop= 2
+        console.log(stop)
+    }
     viewArray(arr)
 })
 
@@ -228,7 +233,11 @@ function delay(ms) {
 //* reads the dictionary sent to it and animates the sorting algo
 async function mergeSort(dict) {
     var depthstart = {}
+    stop = 1
     for (const e of dict.steps) {
+        if(currentSort != "merge" || stop===2){
+            break;
+        }
         console.log(e)
         if (e["type"] == "swap") {
             console.log('swap')
@@ -270,10 +279,15 @@ async function mergeSort(dict) {
             await delay(1000)
         }
     }
+    stop = 0
 }
 
 async function insersionSort(dict) {
+    stop = 1
     for (const e of dict.steps) {
+        if(currentSort != "insertion" || stop===2){
+            break;
+        }
         console.log(e)
         if (e["type"] == "swap") {
             console.log('swap')
@@ -292,10 +306,15 @@ async function insersionSort(dict) {
             animate(bar2, { backgroundColor: "#26D6BB", duration: dur })
         }
     }
+    stop = 0
 }
 
 async function quickSort(dict) {
+    stop = 1
     for (const e of dict.steps) {
+        if(currentSort != "quick" || stop===2){
+            break;
+        }
         console.log(e)
         if (e["type"] == "swap") {
             console.log('swap')
@@ -319,11 +338,17 @@ async function quickSort(dict) {
             animateDepth(e.index, e.depth)
         }
     }
+    stop = 0
 }
 
 
 async function bubbleSort(dict) {
+    console.log(2)
+    stop = 1
     for (const e of dict.steps) {
+        if(currentSort != "bubble" || stop===2){
+            break;
+        }
         console.log(e)
         if (e["type"] == "swap") {
             console.log('swap')
@@ -344,11 +369,16 @@ async function bubbleSort(dict) {
             // animateDepth(e.index, e.depth)
         }
     }
+    stop = 0
 }
 
 async function selectionSort(dict) {
+    stop = 1
     let prevminidx;
     for (const e of dict.steps) {
+        if(currentSort != "selection" || stop===2){
+            break;
+        }
         console.log(e)
         if (e["type"] === "swap") {
             console.log('swap')
@@ -378,6 +408,7 @@ async function selectionSort(dict) {
         }
     }
     await animate(prevminidx, { backgroundColor: "#26D6BB", duration: dur })
+    stop = 0
 }
 
 function mainSort(sortName, steps) {
