@@ -78,7 +78,7 @@ slider.addEventListener("input", (e) => {
 })
 
 sortbutton.addEventListener('click', () => {
-    fetch(`http://127.0.0.1:5000/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
+    fetch(`/api/${currentSort}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "array": arr }) }).then((r) => r.json()).then(steps => mainSort(currentSort, steps))
     // mergeSort(dict)
     // const el = document.getElementById("0")
     // el.id = 5
